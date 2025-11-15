@@ -1,0 +1,83 @@
+﻿<Window x:Class="RoboDk.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:h="http://helix-toolkit.org/wpf"
+        Title="3D TCP Controller by Moumouni BELEM" 
+ 
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <h:HelixViewport3D x:Name="View3D"
+                           Grid.Column="0"
+                           Background="Black"
+                           ShowCoordinateSystem="True"
+                           ShowViewCube="True"
+                           ZoomExtentsWhenLoaded="True"
+                           MouseDown="View3D_MouseDown"
+                           MouseMove="View3D_MouseMove"
+                           MouseUp="View3D_MouseUp">
+
+            <h:SunLight />
+
+            <h:GridLinesVisual3D Center="0,0,0"
+                                 Length="2000"
+                                 Width="2000"
+                                 MinorDistance="200"
+                                 Thickness="0.5" />
+
+            <h:SphereVisual3D x:Name="TcpSphere"
+                              Center="0,0,1000"
+                              Radius="200"
+                              Fill="OrangeRed"
+                              />
+        </h:HelixViewport3D>
+
+        <Border Grid.Column="1" Padding="10" Background="#111" BorderBrush="#333" BorderThickness="1">
+            <StackPanel Orientation="Vertical" Margin="5" >
+
+                <TextBlock Text="3D TCP Controller" 
+                           FontSize="20" 
+                           Foreground="White" 
+                           Margin="0,0,0,10"/>
+
+                <TextBlock Text="RoboDK Status:" Foreground="#CCC" />
+                <TextBlock x:Name="StatusText"
+                           Text="Connecting..."
+                           Foreground="LawnGreen"
+                           FontWeight="Bold"
+                           Margin="0,0,0,15"/>
+
+                <TextBlock Text="TCP Position (mm)" Foreground="#CCC" Margin="0,0,0,5"/>
+                <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                    <TextBlock x:Name="TcpXText" Foreground="White" Text="X: -" />
+                    <TextBlock x:Name="TcpYText" Foreground="White" Text="Y: -" />
+                    <TextBlock x:Name="TcpZText" Foreground="White" Text="Z: -" />
+                </StackPanel>
+
+                <TextBlock Text="Z Height (mm)" 
+                           Foreground="#CCC" 
+                           Margin="0,0,0,5"/>
+                <Slider x:Name="ZSlider"
+                        Minimum="500" Maximum="2000"
+                        ValueChanged="ZSlider_ValueChanged"
+                        TickPlacement="BottomRight"
+                        TickFrequency="100"
+                        IsSnapToTickEnabled="False"
+                        Margin="0,0,0,5"/>
+                <TextBlock x:Name="ZSliderLabel"
+                           Foreground="White"
+                           Text="Z: -"
+                           Margin="0,0,0,15"/>
+
+                <Button Content="Sync sphere to robot TCP"
+                        Click="SyncButton_Click"
+                        Margin="0,0,0,10"/>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
