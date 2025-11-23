@@ -1,2 +1,2 @@
 ## RoboDK WPF app
-It allows controlling a robot in simulation using ROBODK.
+It allows controlling a robot in simulation using ROBODK C# API.
